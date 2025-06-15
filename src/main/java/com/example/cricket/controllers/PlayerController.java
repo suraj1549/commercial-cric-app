@@ -3,33 +3,27 @@ package com.example.cricket.controllers;
 
 import com.example.cricket.models.Player;
 import com.example.cricket.repositories.PlayerRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.cricket.services.PlayerService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController // for returning JSON data(REST apis), converts Java Object to JSON.
 @RequestMapping("/api/players") //
 public class PlayerController {
 
-    private final PlayerRepository playerRepository;
+    private final PlayerService service;
 
-    public PlayerController(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
+    public PlayerController(PlayerService service) {
+        this.service = service;
     }
-
-//    public PlayerController(PlayerRepository repository){
-//        this.playerRepository = repository;
-//    }
-
 
     @PostMapping
-    public Player addPlayer(@RequestBody Player player){
-        return playerRepository.save(player);
+    public ResponseEntity<String> addPlayer(@RequestBody Player player){
+        return service.addPlayer(player);
     }
 
-
-
-
-
+    @DeleteMapping("/{id}")
+    public void deletePlayer(@PathVariable Long id) {
+        service.deleteById(id);
+    }
 }
