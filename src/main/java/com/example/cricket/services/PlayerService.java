@@ -21,8 +21,16 @@ public class PlayerService {
         playerRepository = repository;
     }
 
+    public List<Player> getAllPlayers(){
+        return playerRepository.findAll();
+    }
+
     public Optional<Player> findByNameAndRole(String name, String role) {
         return playerRepository.findByNameAndRole(name, role);
+    }
+
+    public Player save(Player player){
+        return playerRepository.save(player);
     }
 
     public ResponseEntity<String> addPlayer(@RequestBody Player player) {
