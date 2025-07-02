@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController // for returning JSON data(REST apis), converts Java Object to JSON.
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/players") //
 public class PlayerController {
 
